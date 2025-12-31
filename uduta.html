@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For My Uduta 🐿️</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Poppins:wght@300;400;600&display=swap');
+
+        :root {
+            /* Changed colors to be fun and warm, less "romantic red" */
+            --primary: #ff6b6b;
+            --secondary: #ff9e9e;
+            --bg: #fff5f5;
+            --text: #4a4a4a;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            overflow-x: hidden;
+            text-align: center;
+        }
+
+        /* Loading / Intro Screen */
+        .intro {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: radial-gradient(circle, #ffd3d3 0%, #ff6b6b 100%);
+            position: fixed;
+            width: 100%;
+            z-index: 100;
+            transition: transform 1s ease-in-out;
+        }
+
+        .intro h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 3rem;
+            color: white;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            animation: pulse 2s infinite;
+        }
+
+        .btn-open {
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            background: white;
+            color: var(--primary);
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: transform 0.3s;
+        }
+
+        .btn-open:hover {
+            transform: scale(1.1);
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            opacity: 0;
+            transition: opacity 2s;
+        }
+
+        header {
+            padding: 50px 0;
+        }
+
+        h1.main-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 3.5rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        p.subtitle {
+            font-size: 1.2rem;
+            color: #666;
+            letter-spacing: 1px;
+        }
+
+        .quote-box {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(255, 107, 107, 0.15);
+            margin: 40px 0;
+            position: relative;
+            border-left: 5px solid var(--primary);
+        }
+
+        .quote-box p {
+            font-size: 1.4rem;
+            line-height: 1.6;
+            font-weight: 600;
+            color: #d63031;
+        }
+
+        /* Memory Lane - Timeline */
+        .memory-lane {
+            display: flex;
+            flex-direction: column;
+            gap: 50px;
+            margin-top: 50px;
+        }
+
+        .memory-card {
+            background: white;
+            padding: 15px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transform: translateY(50px);
+            opacity: 0;
+            transition: all 0.8s ease-out;
+            position: relative;
+        }
+
+        .memory-card.visible {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        /* Polaroid Effect */
+        .polaroid {
+            background: white;
+            padding: 12px 12px 45px 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+            transform: rotate(-2deg);
+            transition: transform 0.3s;
+        }
+        
+        .polaroid:hover {
+            transform: rotate(0deg) scale(1.02);
+            z-index: 10;
+        }
+
+        .memory-card:nth-child(even) .polaroid {
+            transform: rotate(2deg);
+        }
+        .memory-card:nth-child(even) .polaroid:hover {
+            transform: rotate(0deg) scale(1.02);
+        }
+
+        .memory-img {
+            width: 100%;
+            height: auto;
+            border-radius: 4px;
+            display: block;
+        }
+
+        .caption {
+            margin-top: 25px;
+            font-size: 1.1rem;
+            color: #555;
+            padding: 0 10px;
+            line-height: 1.5;
+        }
+
+        .caption strong {
+            color: var(--primary);
+            font-size: 1.4rem;
+            font-family: 'Dancing Script', cursive;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        /* Footer */
+        footer {
+            margin-top: 80px;
+            padding-bottom: 40px;
+        }
+
+        .final-msg {
+            font-size: 1.8rem;
+            font-family: 'Dancing Script', cursive;
+            color: var(--primary);
+        }
+
+        /* Animations */
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        /* Confetti Canvas */
+        #confetti {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 99;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="intro" id="introScreen">
+        <h1>Hey miss worlduuuuuu.......! 🐿️</h1>
+        <button class="btn-open" onclick="startJourney()">Open for a Surprise</button>
+    </div>
+
+    <canvas id="confetti"></canvas>
+
+    <div class="container" id="mainContent">
+        <header>
+            <h1 class="main-title">Happy New Year 2026</h1>
+            <p class="subtitle">To my best friend</p>
+        </header>
+
+        <div class="quote-box">
+            <p>"So many years will come and go, but my Uduta will always be the same for me. You are the constant in my chaotic world."</p>
+        </div>
+
+        <div class="memory-lane">
+            
+            <div class="memory-card">
+                <div class="polaroid">
+                    <img src="IMG_20250828_132508871.jpg" alt="High Five" class="memory-img">
+                </div>
+                <div class="caption">
+                    <strong>to my uduta fellow....</strong>
+                    High five to another year of tolerating each other! 😂 No matter what happens, we tackle it together. I've always got your back.
+                </div>
+            </div>
+
+            <div class="memory-card">
+                <div class="polaroid">
+                    <img src="IMG_20250828_132500334.jpg" alt="Fun Times" class="memory-img">
+                </div>
+                <div class="caption">
+                    <strong>My Daily Dose of Crazy</strong>
+                    Thank you for being the one person I can be completely weird with. Life is just boring without your madness.
+                </div>
+            </div>
+
+            <div class="memory-card">
+                <div class="polaroid">
+                    <img src="IMG_20250815_154359901.jpg" alt="Traditional" class="memory-img">
+                </div>
+                <div class="caption">
+                    <strong>The Journey</strong>
+                    Walking through life with a friend like you is my biggest blessing. May this year bring you as much joy as you bring to everyone around you.
+                </div>
+            </div>
+
+            <div class="memory-card">
+                <div class="polaroid">
+                    <img src="IMG_20251025_175012110.jpg" alt="Sweetness" class="memory-img">
+                </div>
+                <div class="caption">
+                    <strong>Treats & Talks</strong>
+                    Here's to a 2026 filled with more food, more ice cream, and endless conversations. I promise to always annoy you into smiling.
+                </div>
+            </div>
+
+            <div class="memory-card">
+                <div class="polaroid">
+                    <img src="IMG_20250928_144244126.jpg" alt="Friend" class="memory-img">
+                </div>
+                <div class="caption">
+                    <strong>Main Character Energy</strong>
+                    Just look at that attitude! Keep shining and being your awesome self. The world needs your spark.
+                </div>
+            </div>
+
+             <div class="memory-card">
+                <div class="polaroid">
+                    <img src="IMG_20250920_100451871.jpg" alt="Uduta" class="memory-img">
+                </div>
+                <div class="caption">
+                    <strong>uduta</strong>
+                    Years change, numbers change, but our bond? That stays forever. You're stuck with me for another year (and a lifetime)!
+                </div>
+            </div>
+
+        </div>
+
+        <footer>
+            <div class="final-msg">Let's rock 2026, miss worlduuuuuu! ✨</div>
+        </footer>
+    </div>
+
+    <script>
+        // Start the experience
+        function startJourney() {
+            const intro = document.getElementById('introScreen');
+            const content = document.getElementById('mainContent');
+            
+            intro.style.transform = 'translateY(-100%)';
+            
+            setTimeout(() => {
+                content.style.opacity = '1';
+                startConfetti();
+                checkScroll(); // Check initial scroll position
+            }, 800);
+        }
+
+        // Scroll Animation for Memory Cards
+        const cards = document.querySelectorAll('.memory-card');
+
+        function checkScroll() {
+            const triggerBottom = window.innerHeight / 5 * 4;
+
+            cards.forEach(card => {
+                const cardTop = card.getBoundingClientRect().top;
+
+                if(cardTop < triggerBottom) {
+                    card.classList.add('visible');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', checkScroll);
+
+        // Confetti Effect
+        const canvas = document.getElementById("confetti");
+        const ctx = canvas.getContext("2d");
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        let particles = [];
+        // Cheerful colors
+        const colors = ['#ff6b6b', '#ff9e9e', '#54a0ff', '#1dd1a1', '#feca57'];
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height - canvas.height;
+                this.size = Math.random() * 8 + 3;
+                this.speedY = Math.random() * 3 + 1;
+                this.color = colors[Math.floor(Math.random() * colors.length)];
+                this.rotation = Math.random() * 360;
+            }
+            update() {
+                this.y += this.speedY;
+                this.rotation += 2;
+                if (this.y > canvas.height) {
+                    this.y = -10;
+                    this.x = Math.random() * canvas.width;
+                }
+            }
+            draw() {
+                ctx.save();
+                ctx.translate(this.x, this.y);
+                ctx.rotate(this.rotation * Math.PI / 180);
+                ctx.fillStyle = this.color;
+                ctx.fillRect(0, 0, this.size, this.size);
+                ctx.restore();
+            }
+        }
+
+        function initConfetti() {
+            for (let i = 0; i < 100; i++) {
+                particles.push(new Particle());
+            }
+        }
+
+        function animateConfetti() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => {
+                p.update();
+                p.draw();
+            });
+            requestAnimationFrame(animateConfetti);
+        }
+
+        function startConfetti() {
+            initConfetti();
+            animateConfetti();
+        }
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+
+    </script>
+</body>
+</html>
