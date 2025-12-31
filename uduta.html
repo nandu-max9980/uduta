@@ -209,6 +209,108 @@
             pointer-events: none;
             z-index: 99;
         }
+
+        /* Scroll Indicator */
+        .scroll-indicator {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 98;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            cursor: pointer;
+        }
+
+        .scroll-indicator.visible {
+            opacity: 1;
+        }
+
+        .scroll-indicator.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .scroll-label {
+            font-size: 0.9rem;
+            color: var(--primary);
+            font-weight: 500;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            background: rgba(255, 255, 255, 0.9);
+            padding: 8px 20px;
+            border-radius: 25px;
+            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.2);
+        }
+
+        .scroll-arrow {
+            width: 40px;
+            height: 40px;
+            border: 3px solid var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+            animation: bounce 2s infinite;
+        }
+
+        .scroll-arrow svg {
+            width: 20px;
+            height: 20px;
+            fill: var(--primary);
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-10px);
+            }
+            60% {
+                transform: translateY(-5px);
+            }
+        }
+
+        .mouse-scroll {
+            width: 26px;
+            height: 40px;
+            border: 3px solid var(--primary);
+            border-radius: 15px;
+            position: relative;
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        .mouse-scroll::before {
+            content: '';
+            position: absolute;
+            top: 8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 8px;
+            background: var(--primary);
+            border-radius: 2px;
+            animation: scroll-wheel 1.5s infinite;
+        }
+
+        @keyframes scroll-wheel {
+            0% {
+                opacity: 1;
+                transform: translateX(-50%) translateY(0);
+            }
+            100% {
+                opacity: 0;
+                transform: translateX(-50%) translateY(12px);
+            }
+        }
     </style>
 </head>
 <body>
@@ -219,6 +321,17 @@
     </div>
 
     <canvas id="confetti"></canvas>
+
+    <!-- Scroll Indicator -->
+    <div class="scroll-indicator" id="scrollIndicator">
+        <span class="scroll-label">Scroll Down</span>
+        <div class="mouse-scroll"></div>
+        <div class="scroll-arrow">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/>
+            </svg>
+        </div>
+    </div>
 
     <div class="container" id="mainContent">
         <header>
@@ -311,6 +424,7 @@
                 content.style.opacity = '1';
                 startConfetti();
                 checkScroll(); // Check initial scroll position
+                showScrollIndicator(); // Show scroll indicator
             }, 800);
         }
 
@@ -330,6 +444,33 @@
         }
 
         window.addEventListener('scroll', checkScroll);
+
+        // Scroll Indicator Functions
+        const scrollIndicator = document.getElementById('scrollIndicator');
+
+        function showScrollIndicator() {
+            scrollIndicator.classList.add('visible');
+        }
+
+        function hideScrollIndicator() {
+            scrollIndicator.classList.add('hidden');
+            scrollIndicator.classList.remove('visible');
+        }
+
+        // Hide scroll indicator when user scrolls down
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                hideScrollIndicator();
+            }
+        });
+
+        // Click to scroll down smoothly
+        scrollIndicator.addEventListener('click', () => {
+            window.scrollBy({
+                top: window.innerHeight * 0.8,
+                behavior: 'smooth'
+            });
+        });
 
         // Confetti Effect
         const canvas = document.getElementById("confetti");
