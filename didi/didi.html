@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For My Pandhi 🐿️</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Poppins:wght@300;400;600&display=swap');
+
+:root{
+  --primary:#ff6b6b;
+  --secondary:#ff9e9e;
+  --bg:#fff5f5;
+  --text:#444;
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+
+body{
+  font-family:'Poppins',sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  overflow-x:hidden;
+  text-align:center;
+}
+
+/* Intro */
+.intro{
+  position:fixed;
+  inset:0;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  background:radial-gradient(circle,#ffd3d3,#ff6b6b);
+  z-index:100;
+  transition:transform 1s ease;
+}
+.intro h1{
+  font-family:'Dancing Script',cursive;
+  font-size:3.2rem;
+  color:#fff;
+  margin-bottom:20px;
+  animation:pulse 2s infinite;
+}
+.btn-open{
+  padding:15px 40px;
+  border:none;
+  border-radius:50px;
+  background:#fff;
+  color:var(--primary);
+  font-size:1.2rem;
+  font-weight:600;
+  cursor:pointer;
+  box-shadow:0 6px 20px rgba(0,0,0,.2);
+}
+
+/* Main */
+.container{
+  max-width:850px;
+  margin:auto;
+  padding:20px;
+  opacity:0;
+  transition:opacity 2s;
+}
+header{padding:60px 0}
+.main-title{
+  font-family:'Dancing Script',cursive;
+  font-size:3.6rem;
+  color:var(--primary);
+}
+.subtitle{color:#666;font-size:1.2rem}
+
+/* Quote */
+.quote{
+  background:#fff;
+  padding:30px;
+  margin:40px 0;
+  border-radius:20px;
+  box-shadow:0 10px 30px rgba(255,107,107,.2);
+  font-size:1.4rem;
+  color:#d63031;
+}
+
+/* Cards */
+.memory-lane{
+  display:flex;
+  flex-direction:column;
+  gap:55px;
+  margin-top:60px;
+}
+.memory-card{
+  background:#fff;
+  border-radius:15px;
+  box-shadow:0 5px 20px rgba(0,0,0,.1);
+  padding:15px;
+  transform:translateY(50px);
+  opacity:0;
+  transition:.8s;
+}
+.memory-card.visible{
+  transform:translateY(0);
+  opacity:1;
+}
+.polaroid{
+  background:#fff;
+  padding:12px 12px 45px;
+  box-shadow:0 4px 10px rgba(0,0,0,.15);
+  transform:rotate(-2deg);
+}
+.memory-card:nth-child(even) .polaroid{transform:rotate(2deg)}
+.memory-img{
+  width:100%;
+  border-radius:4px;
+}
+.caption{
+  margin-top:25px;
+  font-size:1.15rem;
+  color:#555;
+  line-height:1.6;
+}
+.caption strong{
+  display:block;
+  font-family:'Dancing Script',cursive;
+  color:var(--primary);
+  font-size:1.5rem;
+  margin-bottom:8px;
+}
+
+/* Footer */
+footer{
+  margin:90px 0 40px;
+  font-family:'Dancing Script',cursive;
+  font-size:2rem;
+  color:var(--primary);
+}
+
+/* Scroll */
+.scroll-indicator{
+  position:fixed;
+  bottom:30px;
+  left:50%;
+  transform:translateX(-50%);
+  opacity:0;
+  transition:.5s;
+}
+.scroll-indicator.visible{opacity:1}
+.mouse-scroll{
+  width:26px;height:40px;
+  border:3px solid var(--primary);
+  border-radius:15px;
+}
+
+/* Confetti */
+#confetti{
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:99;
+}
+
+@keyframes pulse{
+  0%{transform:scale(1)}
+  50%{transform:scale(1.05)}
+  100%{transform:scale(1)}
+}
+</style>
+</head>
+
+<body>
+
+<div class="intro" id="intro">
+  <h1>Hey.. Pandhi 🐿️✨</h1>
+  <button class="btn-open" onclick="start()">Open</button>
+</div>
+
+<canvas id="confetti"></canvas>
+
+<div class="scroll-indicator" id="scrollIndicator">
+  <div class="mouse-scroll"></div>
+</div>
+
+<div class="container" id="content">
+
+<header>
+  <h1 class="main-title">2025 Memories</h1>
+  <p class="subtitle">For my Didi • My Panda • My Goddess</p>
+</header>
+
+<div class="quote">
+  "Years will change, moments will pass…  
+  but my Pandhi being my Pandhi will never change.  
+  You are my calm, my strength, my divine blessing."
+</div>
+
+<div class="memory-lane">
+
+<div class="memory-card">
+  <div class="polaroid">
+    <img src="IMG_20250821_155544696.jpg" class="memory-img">
+  </div>
+  <div class="caption">
+    <strong>That Smile 🥹</strong>
+    When you smile like this, Didi, the whole world feels lighter to me.  
+    This smile is my biggest comfort.
+  </div>
+</div>
+
+<div class="memory-card">
+  <div class="polaroid">
+    <img src="IMG_20250816_145949718.jpg" class="memory-img">
+  </div>
+  <div class="caption">
+    <strong>My Goddess ✨</strong>
+    In traditions, in silence, in grace —  
+    you look like someone sent directly by God into my life.
+  </div>
+</div>
+
+<div class="memory-card">
+  <div class="polaroid">
+    <img src="IMG_20250808_112805402.jpg" class="memory-img">
+  </div>
+  <div class="caption">
+    <strong>Always With Me</strong>
+    Standing beside you feels special -
+    no one in this world has your vibe, Pandhi. 
+    
+  </div>
+</div>
+
+<div class="memory-card">
+  <div class="polaroid">
+    <img src="IMG_20250604_132653192.jpg" class="memory-img">
+  </div>
+  <div class="caption">
+    <strong>Little Joys 🍦</strong>
+    Ice cream moments, silly laughs, random talks…  
+    With you, even the smallest moments become memories forever.
+  </div>
+</div>
+
+<div class="memory-card">
+  <div class="polaroid">
+    <img src="IMG_20250904_142256214~3.jpg" class="memory-img">
+  </div>
+  <div class="caption">
+    <strong>Panda Energy 🐼</strong>
+    This is confidence, strength, and magic in one frame.  
+    Never stop being this powerful, Didi.
+  </div>
+</div>
+
+<div class="memory-card">
+  <div class="polaroid">
+    <img src="IMG_20250904_142211503.jpg" class="memory-img">
+  </div>
+  <div class="caption">
+    <strong>Forever My Pandhi 🐿️</strong>
+    Years may pass. Numbers may change.  
+    But you being my Pandhi?  
+    That’s permanent. For life.
+  </div>
+</div>
+
+</div>
+
+<footer>
+  Happy New Year 2026, my Goddess 💖  
+  — Always your Batman
+</footer>
+
+</div>
+
+<script>
+function start(){
+  document.getElementById('intro').style.transform='translateY(-100%)';
+  setTimeout(()=>{
+    document.getElementById('content').style.opacity=1;
+    document.getElementById('scrollIndicator').classList.add('visible');
+    startConfetti();
+  },800);
+}
+
+const cards=document.querySelectorAll('.memory-card');
+window.addEventListener('scroll',()=>{
+  cards.forEach(c=>{
+    if(c.getBoundingClientRect().top<window.innerHeight*0.8){
+      c.classList.add('visible');
+    }
+  });
+});
+
+/* Confetti */
+const canvas=document.getElementById('confetti');
+const ctx=canvas.getContext('2d');
+canvas.width=innerWidth;canvas.height=innerHeight;
+let parts=[];
+const colors=['#ff6b6b','#54a0ff','#1dd1a1','#feca57'];
+class P{
+  constructor(){
+    this.x=Math.random()*canvas.width;
+    this.y=Math.random()*canvas.height-canvas.height;
+    this.s=Math.random()*8+3;
+    this.v=Math.random()*3+1;
+    this.c=colors[Math.floor(Math.random()*colors.length)];
+  }
+  u(){this.y+=this.v;if(this.y>canvas.height)this.y=-10}
+  d(){ctx.fillStyle=this.c;ctx.fillRect(this.x,this.y,this.s,this.s)}
+}
+function startConfetti(){
+  for(let i=0;i<120;i++)parts.push(new P());
+  (function a(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    parts.forEach(p=>{p.u();p.d()});
+    requestAnimationFrame(a);
+  })();
+}
+</script>
+
+</body>
+</html>
